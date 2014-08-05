@@ -13,8 +13,8 @@ var gulp = require('gulp'),
     paths = {
     scripts: './app/**/*.js',
     jsCompiled: 'public/js',
-    scss: './app/scss/**/*.scss',
-    scssDir: './app/scss',
+    scss: './app/assets/scss/**/*.scss',
+    scssDir: './app/assets/scss',
     css: './public/css'
   };
 
