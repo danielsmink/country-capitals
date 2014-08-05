@@ -4,3 +4,4 @@
 .idea/
 /tmp
 public/
+.sass-cache

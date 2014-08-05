@@ -8,9 +8,23 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
     bytediff = require('gulp-bytediff'),
-    stylish = require('jshint-stylish');
+    stylish = require('jshint-stylish'),
+    minifyCSS = require('gulp-minify-css');
 
 require('gulp-help')(gulp);
+
+// Compile compass
+gulp.task('compass', function () {
+  return gulp.src('./app/scss/**/*.scss')
+    .pipe(compass({
+      config_file: './config.rb',
+      css: 'public/css',
+      sass: 'app/scss'
+    }))
+    // Minify CSS
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./public/css'));
+});
 
 // Run code through jshint
 gulp.task('jshint', function () {
