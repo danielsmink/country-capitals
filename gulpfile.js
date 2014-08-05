@@ -1,6 +1,8 @@
-'us strict';
+'use strict';
 
 var gulp = require('gulp'),
+    browserSync = require('browser-sync'),
+    reload = browserSync.reload,
     compass = require('gulp-compass'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
@@ -20,6 +22,16 @@ var gulp = require('gulp'),
 
 require('gulp-help')(gulp);
 
+// Start BrowserSync
+gulp.task('browser-sync', false, function () {
+  browserSync({
+    server: {
+      baseDir: './public'
+    },
+    port: 7080
+  });
+});
+
 // Compile compass
 gulp.task('compass', 'Compiles compass', function () {
   return gulp.src(paths.scss)
@@ -30,7 +42,8 @@ gulp.task('compass', 'Compiles compass', function () {
     }))
     // Minify CSS
     .pipe(minifyCSS())
-    .pipe(gulp.dest(paths.css));
+    .pipe(gulp.dest(paths.css))
+    .pipe(reload({stream:true}));
 });
 
 // Run code through jshint
@@ -56,7 +69,8 @@ gulp.task('js', 'Minifies JavaScript files', ['jshint'], function () {
     .pipe(uglify({mangle: true}))
     .pipe(bytediff.stop())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.jsCompiled));
+    .pipe(gulp.dest(paths.jsCompiled))
+    .pipe(reload({stream:true}));
 });
 
 // Rerun the task when a file changes
@@ -66,4 +80,4 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 });
 
 // Default task
-gulp.task('default', 'The default task :-)', ['watch', 'compass', 'js']);
+gulp.task('default', 'The default task :-)', ['watch', 'compass', 'js', 'browser-sync']);

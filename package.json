@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/danielsmink/country-capitals",
   "devDependencies": {
+    "browser-sync": "^1.3.3",
     "gulp": "^3.8.7",
     "gulp-bytediff": "^0.2.0",
     "gulp-compass": "^1.2.0",
