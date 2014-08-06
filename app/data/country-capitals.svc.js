@@ -21,9 +21,9 @@ function geonamesService ($http, geoApiUsername, apiBaseUrl) {
       {
         method: 'JSONP',
         url: apiBaseUrl + '/countryInfoJSON',
-        'params': {
-          'callback': 'JSON_CALLBACK',
-          'username': geoApiUsername
+        params: {
+          callback: 'JSON_CALLBACK',
+          username: geoApiUsername
         }
       }
     );

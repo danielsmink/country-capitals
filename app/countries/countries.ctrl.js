@@ -7,14 +7,21 @@ angular
   .module('CountriesCtrl', CountriesCtrl);
 
 /* @ngInject */
-function CountriesCtrl (geonamesService) {
-  var countries = this;
+function CountriesCtrl (geonamesService, geonamesCache) {
+  var countries = this,
+    cache = geonamesCache.get('countries');
 
-  geonamesService.getCountries()
-    .success(function (geonames) {
-      countries.geonames = geonames.geonames;
-    })
-    .error(function () {
-      countries.error = 'Error retrieving country list';
-    });
+  // Use cache if the country list is already cached
+  if (cache) {
+    countries.geonames = cache;
+  } else {
+    geonamesService.getCountries()
+      .success(function (geonames) {
+        geonamesCache.put('countries', geonames.geonames);
+        countries.geonames = geonamesCache.get('countries');
+      })
+      .error(function () {
+        countries.error = 'Error retrieving country list';
+      });
+  }
 }
