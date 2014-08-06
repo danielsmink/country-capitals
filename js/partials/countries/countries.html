@@ -11,7 +11,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="country in countries.geonames | orderBy:countries.ordering">
+            <tr
+                data-ng-repeat="country in countries.geonames | orderBy:countries.ordering"
+                data-ng-click="countries.go('/countries/' + country.countryName, country.countryCode)">
                 <td>{{country.countryName}}</td>
                 <td>{{country.countryCode}}</td>
                 <td>{{country.capital}}</td>
