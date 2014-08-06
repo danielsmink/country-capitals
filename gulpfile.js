@@ -12,6 +12,7 @@ var gulp = require('gulp'),
   bytediff = require('gulp-bytediff'),
   stylish = require('jshint-stylish'),
   minifyCSS = require('gulp-minify-css'),
+  deploy = require('gulp-gh-pages'),
   paths = {
     scripts: './app/**/*.js',
     jsCompiled: 'public/js',
@@ -98,3 +99,9 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 
 // Default task
 gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'compass', 'js', 'browser-sync']);
+
+// Deploy task
+gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', function () {
+  return gulp.src('./public/**/*')
+    .pipe(deploy());
+});
