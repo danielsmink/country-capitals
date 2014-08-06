@@ -15,7 +15,9 @@ function config ($routeProvider) {
       templateUrl: './js/partials/home/home.html'
     })
     .when('/countries', {
-      templateUrl: './js/partials/countries/countries.html'
+      templateUrl: './js/partials/countries/countries.html',
+      controller: 'CountriesCtrl',
+      controllerAs: 'countries'
     })
     .when('/countries/:country', {
       templateUrl: './js/partials/country-detail/country-detail.html'

@@ -1,3 +1,22 @@
-/**
- * Created by Shorkan on 05/08/14.
+'use strict';
+
+/*
+ * Contains a service to communicate with the Geonames API
  */
+angular
+  .module('countryCapitals')
+  .factory('geonamesService', geonamesService);
+
+/* @ngInject */
+function geonamesService (geoApiUsername) {
+
+  var service = {
+    getCountries: getCountries
+  };
+  return service;
+
+  ////////////
+  function getCountries () {
+    return geoApiUsername;
+  }
+}

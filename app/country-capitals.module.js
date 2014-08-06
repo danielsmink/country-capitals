@@ -1,4 +1,4 @@
 'use strict';
 
 angular
-  .module('countryCapitals', ['ngRoute']);
+  .module('countryCapitals', ['ngRoute', 'countryCapitals.config']);

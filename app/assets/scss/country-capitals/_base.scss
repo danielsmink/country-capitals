@@ -23,4 +23,9 @@
         text-align: center;
         padding: 20px 0px 10px 0px;
     }
+
+    .animate-view-container {
+        @include rem(width, 1280px);
+        margin: 0 auto;
+    }
 }
