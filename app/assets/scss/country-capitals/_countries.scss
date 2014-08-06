@@ -8,7 +8,9 @@
     }
 
     table {
-        border-collapse: collapse;
+        border-collapse: separate;
+        display: table;
+        overflow-y: auto;
         width: 100%;
     }
 
@@ -16,7 +18,12 @@
         text-align: left;
     }
 
+    thead {
+        display: table-header-group;
+    }
+
     tbody {
+        display: table-row-group;
         tr:nth-child(even) {
             background-color: #EEE;
         }
