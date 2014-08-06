@@ -11,6 +11,8 @@ function CountriesCtrl (geonamesService, geonamesCache) {
   var countries = this,
     cache = geonamesCache.get('countries');
 
+  countries.ordering = 'countryName';
+
   // Use cache if the country list is already cached
   if (cache) {
     countries.geonames = cache;

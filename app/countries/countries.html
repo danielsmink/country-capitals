@@ -2,16 +2,16 @@
     <table>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Country Code</th>
-                <th>Capital</th>
-                <th>Area in km2</th>
-                <th>Population</th>
-                <th>Continent</th>
+                <th data-ng-click="countries.ordering='countryName'">Name</th>
+                <th data-ng-click="countries.ordering='countryCode'">Country Code</th>
+                <th data-ng-click="countries.ordering='capital'">Capital</th>
+                <th data-ng-click="countries.ordering='areaInSqKm'">Area in km2</th>
+                <th data-ng-click="countries.ordering='population'">Population</th>
+                <th data-ng-click="countries.ordering='continent'">Continent</th>
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="country in countries.geonames">
+            <tr data-ng-repeat="country in countries.geonames | orderBy:countries.ordering">
                 <td>{{country.countryName}}</td>
                 <td>{{country.countryCode}}</td>
                 <td>{{country.capital}}</td>
