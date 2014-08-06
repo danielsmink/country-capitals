@@ -1,22 +1,24 @@
-<table class="country-table" data-ng-if="countries.geonames">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Country Code</th>
-            <th>Capital</th>
-            <th>Area in km2</th>
-            <th>Population</th>
-            <th>Continent</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr data-ng-repeat="country in countries.geonames">
-            <td>{{country.countryName}}</td>
-            <td>{{country.countryCode}}</td>
-            <td>{{country.capital}}</td>
-            <td>{{country.areaInSqKm | number}}</td>
-            <td>{{country.population | number}}</td>
-            <td>{{country.continent}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="country-table-wrapper" data-ng-if="countries.geonames">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country Code</th>
+                <th>Capital</th>
+                <th>Area in km2</th>
+                <th>Population</th>
+                <th>Continent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="country in countries.geonames">
+                <td>{{country.countryName}}</td>
+                <td>{{country.countryCode}}</td>
+                <td>{{country.capital}}</td>
+                <td>{{country.areaInSqKm | number}}</td>
+                <td>{{country.population | number}}</td>
+                <td>{{country.continent}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

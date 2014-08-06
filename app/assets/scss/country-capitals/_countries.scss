@@ -1,8 +1,11 @@
 // App container
 #country-capitals {
-    .country-table {
+    .country-table-wrapper {
         height: 500px;
-        overflow: hidden;
+        overflow-y: auto;
+        width: 100%;
+    }
+    table {
         width: 100%;
     }
 }
