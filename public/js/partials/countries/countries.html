@@ -1,0 +1,27 @@
+<div class="country-table-wrapper">
+    <table data-ng-if="countries.geonames">
+        <thead>
+            <tr>
+                <th data-ng-click="countries.ordering='countryName'">Name</th>
+                <th data-ng-click="countries.ordering='countryCode'">Country Code</th>
+                <th data-ng-click="countries.ordering='capital'">Capital</th>
+                <th data-ng-click="countries.ordering='areaInSqKm'">Area in km2</th>
+                <th data-ng-click="countries.ordering='population'">Population</th>
+                <th data-ng-click="countries.ordering='continent'">Continent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="country in countries.geonames | orderBy:countries.ordering">
+                <td>{{country.countryName}}</td>
+                <td>{{country.countryCode}}</td>
+                <td>{{country.capital}}</td>
+                <td>{{country.areaInSqKm | number}}</td>
+                <td>{{country.population | number}}</td>
+                <td>{{country.continent}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p data-ng-if="countries.error">
+        {{countries.error}}
+    </p>
+</div>
