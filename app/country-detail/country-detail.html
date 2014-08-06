@@ -1,6 +1,28 @@
 <div class="country-detail-wrapper">
-    <div data-ng-if="country.detail">
-        {{country.detail.countryName}}
+    <div data-ng-if="country.detail.country">
+        <h2>{{country.detail.country.countryName}}</h2>
+        <dl>
+            <dt>Population of Country:</dt>
+            <dd>{{country.detail.country.population | number}}</dd>
+            <dt>Area:</dt>
+            <dd>{{country.detail.country.areaInSqKm | number}} square km</dd>
+            <dt>Capital:</dt>
+            <dd>{{country.detail.capital.name}}</dd>
+            <dt>Population of Capital:</dt>
+            <dd>{{country.detail.capital.population | number}}</dd>
+            <dt data-ng-if="country.detail.neighbours.length != 0">{{country.detail.neighbours.length}} Neighbours:</dt>
+            <dd data-ng-if="country.detail.neighbours.length != 0">
+                <a data-ng-repeat="neighbour in country.detail.neighbours"
+                   data-ng-click="country.go('/countries/' + neighbour.countryName, neighbour.countryCode)"
+                        href="">
+                    {{neighbour.name}}<span data-ng-if="!$last">, </span>
+                </a>
+            </dd>
+        </dl>
+        <div class="images">
+            <img data-ng-src="http://www.geonames.org/flags/x/{{country.detail.country.countryCode | lowercase}}.gif" />
+            <img data-ng-src="http://www.geonames.org/img/country/250/{{country.detail.country.countryCode | uppercase}}.png" />
+        </div>
     </div>
     <p data-ng-if="country.error">
         {{country.error}}

@@ -14,10 +14,13 @@ function geonamesService ($http, geoApiUsername, apiBaseUrl) {
     service = {
     getCountries: getCountries,
     getCountry: getCountry,
+    getCapital: getCapital,
+    getNeighbours: getNeighbours,
     isoCode: isoCode,
     setIsoCode: setIsoCode
   };
 
+  // Retrieve a list of countries
   function getCountries () {
 
     // return Promise
@@ -33,7 +36,25 @@ function geonamesService ($http, geoApiUsername, apiBaseUrl) {
     );
   }
 
-  function getCountry (countryName) {
+  // Retrieve a single country
+  function getCountry () {
+
+    // return Promise
+    return $http(
+      {
+        method: 'JSONP',
+        url: apiBaseUrl + '/countryInfoJSON',
+        params: {
+          callback: 'JSON_CALLBACK',
+          username: geoApiUsername,
+          country: service.isoCode
+        }
+      }
+    );
+  }
+
+  // Retrieve capital info from Geonames API
+  function getCapital (country) {
 
     // return Promise
     return $http(
@@ -43,15 +64,33 @@ function geonamesService ($http, geoApiUsername, apiBaseUrl) {
         params: {
           callback: 'JSON_CALLBACK',
           username: geoApiUsername,
-          q: countryName,
+          q: country.capital,
           country: service.isoCode,
-          name_equals: countryName,
+          name_equals: country.capital,
           isNameRequired: true
         }
       }
     );
   }
 
+  // Retrieve capital info from Geonames API
+  function getNeighbours (geonameId) {
+
+    // return Promise
+    return $http(
+      {
+        method: 'JSONP',
+        url: apiBaseUrl + '/neighboursJSON',
+        params: {
+          callback: 'JSON_CALLBACK',
+          username: geoApiUsername,
+          geonameId: geonameId
+        }
+      }
+    );
+  }
+
+  // Set isoCode so it can be easily reused
   function setIsoCode (isoCode) {
     service.isoCode = isoCode;
   }
