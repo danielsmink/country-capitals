@@ -7,10 +7,11 @@ angular
   .module('CountryDetailCtrl', CountryDetailCtrl);
 
 /* @ngInject */
-function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCache) {
+function CountryDetailCtrl ($routeParams, geonamesService, geonamesCache) {
   var country = this,
     countryName = $routeParams.country,
-    cache = geonamesCache.get(countryName);
+    countryCode = geonamesService.isoCode,
+    cache = geonamesCache.get(countryCode);
 
   // Use cache if the country is already cached
   if (cache) {
@@ -21,8 +22,8 @@ function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCa
         if(detail.geonames.length === 0) {
           country.error = 'Error retrieving country';
         } else {
-          geonamesCache.put(countryName, detail.geonames[0]);
-          country.detail = geonamesCache.get(countryName);
+          geonamesCache.put(countryCode, detail.geonames[0]);
+          country.detail = geonamesCache.get(countryCode);
         }
       })
       .error(function () {
