@@ -1,0 +1,26 @@
+// App container
+#country-capitals {
+    @include box-sizing(border-box);
+    @include rem(font-size, 16px);
+    width: 100%;
+    height: 100%;
+    font-family: $cc-font-main;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+
+    * {
+        @include box-sizing(border-box);
+    }
+
+    header {
+        border-bottom: 1px solid #000;
+    }
+
+    h1 {
+        @include rem(font-size, 48px);
+        font-weight: 700;
+        text-align: center;
+        padding: 20px 0px 10px 0px;
+    }
+}
