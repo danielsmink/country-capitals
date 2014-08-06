@@ -7,6 +7,14 @@ angular
   .module('CountriesCtrl', CountriesCtrl);
 
 /* @ngInject */
-function CountriesCtrl ($scope, geonamesService) {
-  this.name = geonamesService.getCountries();
+function CountriesCtrl (geonamesService) {
+  var countries = this;
+
+  geonamesService.getCountries()
+    .success(function (geonames) {
+      countries.geonames = geonames.geonames;
+    })
+    .error(function () {
+      countries.error = 'Error retrieving country list';
+    });
 }

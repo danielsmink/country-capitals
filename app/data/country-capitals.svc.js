@@ -8,15 +8,26 @@ angular
   .factory('geonamesService', geonamesService);
 
 /* @ngInject */
-function geonamesService (geoApiUsername) {
+function geonamesService ($http, geoApiUsername, apiBaseUrl) {
 
   var service = {
     getCountries: getCountries
   };
-  return service;
 
-  ////////////
   function getCountries () {
-    return geoApiUsername;
+
+    // return Promise
+    return $http(
+      {
+        method: 'JSONP',
+        url: apiBaseUrl + '/countryInfoJSON',
+        'params': {
+          'callback': 'JSON_CALLBACK',
+          'username': geoApiUsername
+        }
+      }
+    );
   }
+
+  return service;
 }

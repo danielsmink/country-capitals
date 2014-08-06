@@ -5,4 +5,5 @@
  */
 angular
   .module('countryCapitals.config', [])
-  .constant('geoApiUsername', 'danielsmink');
+  .constant('geoApiUsername', 'danielsmink')
+  .constant('apiBaseUrl', 'http://api.geonames.org/');
