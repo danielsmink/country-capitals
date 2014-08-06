@@ -1,23 +1,24 @@
 'use strict';
 
 var gulp = require('gulp'),
-    browserSync = require('browser-sync'),
-    reload = browserSync.reload,
-    compass = require('gulp-compass'),
-    jshint = require('gulp-jshint'),
-    concat = require('gulp-concat'),
-    ngAnnotate = require('gulp-ng-annotate'),
-    uglify = require('gulp-uglify'),
-    sourcemaps = require('gulp-sourcemaps'),
-    bytediff = require('gulp-bytediff'),
-    stylish = require('jshint-stylish'),
-    minifyCSS = require('gulp-minify-css'),
-    paths = {
+  browserSync = require('browser-sync'),
+  reload = browserSync.reload,
+  compass = require('gulp-compass'),
+  jshint = require('gulp-jshint'),
+  concat = require('gulp-concat'),
+  ngAnnotate = require('gulp-ng-annotate'),
+  uglify = require('gulp-uglify'),
+  sourcemaps = require('gulp-sourcemaps'),
+  bytediff = require('gulp-bytediff'),
+  stylish = require('jshint-stylish'),
+  minifyCSS = require('gulp-minify-css'),
+  paths = {
     scripts: './app/**/*.js',
     jsCompiled: 'public/js',
     scss: './app/assets/scss/**/*.scss',
     scssDir: './app/assets/scss',
-    css: './public/css'
+    css: './public/css',
+    indexFile: './app/index.html'
   };
 
 require('gulp-help')(gulp);
@@ -54,6 +55,13 @@ gulp.task('jshint', false, function () {
     .pipe(jshint.reporter('fail'));
 });
 
+// Copy html
+gulp.task('copy-html', 'Copies index.html to public folder', function() {
+  return gulp.src(paths.indexFile)
+    .pipe(gulp.dest('./public'))
+    .pipe(reload({stream:true}));
+});
+
 // Run jshint first
 gulp.task('js', 'Minifies JavaScript files', ['jshint'], function () {
   return gulp.src(paths.scripts)
@@ -77,7 +85,8 @@ gulp.task('js', 'Minifies JavaScript files', ['jshint'], function () {
 gulp.task('watch', 'Watches JavaScript and sass files', function() {
   gulp.watch(paths.scripts, ['js']);
   gulp.watch(paths.scss, ['compass']);
+  gulp.watch(paths.indexFile, ['copy-html']);
 });
 
 // Default task
-gulp.task('default', 'The default task :-)', ['watch', 'compass', 'js', 'browser-sync']);
+gulp.task('default', 'The default task :-)', ['watch', 'copy-html', 'compass', 'js', 'browser-sync']);
