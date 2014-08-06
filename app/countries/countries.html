@@ -1,5 +1,5 @@
-<div class="country-table-wrapper" data-ng-if="countries.geonames">
-    <table>
+<div class="country-table-wrapper">
+    <table data-ng-if="countries.geonames">
         <thead>
             <tr>
                 <th data-ng-click="countries.ordering='countryName'">Name</th>
@@ -21,7 +21,7 @@
             </tr>
         </tbody>
     </table>
+    <p data-ng-if="countries.error">
+        {{countries.error}}
+    </p>
 </div>
-<p data-ng-if="countries.error">
-    {{countries.error}}
-</p>

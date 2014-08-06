@@ -1,6 +1,10 @@
 // Countries view styling
 #country-capitals {
 
+    .country-table-wrapper {
+        min-height: 535px;
+    }
+
     table {
         table-layout: fixed;
         border-collapse: collapse;
