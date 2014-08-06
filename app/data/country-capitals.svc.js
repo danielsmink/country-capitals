@@ -10,8 +10,12 @@ angular
 /* @ngInject */
 function geonamesService ($http, geoApiUsername, apiBaseUrl) {
 
-  var service = {
-    getCountries: getCountries
+  var isoCode = '',
+    service = {
+    getCountries: getCountries,
+    getCountry: getCountry,
+    isoCode: isoCode,
+    setIsoCode: setIsoCode
   };
 
   function getCountries () {
@@ -27,6 +31,29 @@ function geonamesService ($http, geoApiUsername, apiBaseUrl) {
         }
       }
     );
+  }
+
+  function getCountry (countryName) {
+
+    // return Promise
+    return $http(
+      {
+        method: 'JSONP',
+        url: apiBaseUrl + '/searchJSON',
+        params: {
+          callback: 'JSON_CALLBACK',
+          username: geoApiUsername,
+          q: countryName,
+          country: service.isoCode,
+          name_equals: countryName,
+          isNameRequired: true
+        }
+      }
+    );
+  }
+
+  function setIsoCode (isoCode) {
+    service.isoCode = isoCode;
   }
 
   return service;

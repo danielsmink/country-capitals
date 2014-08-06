@@ -7,11 +7,16 @@ angular
   .module('CountriesCtrl', CountriesCtrl);
 
 /* @ngInject */
-function CountriesCtrl (geonamesService, geonamesCache) {
+function CountriesCtrl ($location, geonamesService, geonamesCache) {
   var countries = this,
     cache = geonamesCache.get('countries');
 
   countries.ordering = 'countryName';
+
+  countries.go = function (path, isoCode) {
+    geonamesService.setIsoCode(isoCode);
+    $location.path(path);
+  };
 
   // Use cache if the country list is already cached
   if (cache) {

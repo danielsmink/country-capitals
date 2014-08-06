@@ -20,7 +20,9 @@ function config ($routeProvider) {
       controllerAs: 'countries'
     })
     .when('/countries/:country', {
-      templateUrl: './js/partials/country-detail/country-detail.html'
+      templateUrl: './js/partials/country-detail/country-detail.html',
+      controller: 'CountryDetailCtrl',
+      controllerAs: 'country'
     })
     .when('/error', {
       template : '<p>Error Page Not Found</p>'
