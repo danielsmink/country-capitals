@@ -13,7 +13,7 @@
             <dt data-ng-if="country.detail.neighbours.length != 0">{{country.detail.neighbours.length}} Neighbours:</dt>
             <dd data-ng-if="country.detail.neighbours.length != 0">
                 <a data-ng-repeat="neighbour in country.detail.neighbours"
-                   data-ng-click="country.go('/countries/' + neighbour.countryName, neighbour.countryCode)"
+                   data-ng-click="country.go('/countries/' + neighbour.countryCode + '-' + neighbour.countryName)"
                         href="">
                     {{neighbour.name}}<span data-ng-if="!$last">, </span>
                 </a>

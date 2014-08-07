@@ -9,9 +9,11 @@ angular
 /* @ngInject */
 function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCache) {
   var country = this,
-    countryName = $routeParams.country,
-    countryCode = geonamesService.isoCode,
+    countryParams = $routeParams.country.split('-'),
+    countryCode = countryParams[0],
     cache = geonamesCache.get(countryCode);
+
+  geonamesService.setIsoCode(countryCode);
 
   country.detail = {
     country: '',
@@ -19,8 +21,7 @@ function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCa
     neighbours: ''
   };
 
-  country.go = function (path, isoCode) {
-    geonamesService.setIsoCode(isoCode);
+  country.go = function (path) {
     $location.path(path);
   };
 

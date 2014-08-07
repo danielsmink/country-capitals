@@ -13,8 +13,7 @@ function CountriesCtrl ($location, geonamesService, geonamesCache) {
 
   countries.ordering = 'countryName';
 
-  countries.go = function (path, isoCode) {
-    geonamesService.setIsoCode(isoCode);
+  countries.go = function (path) {
     $location.path(path);
   };
 
