@@ -22,23 +22,17 @@ function CountriesCtrl ($location, $timeout, geonamesService, geonamesCache) {
   // Use cache if the country list is already cached
   if (cache) {
     countries.geonames = cache;
+    countries.isLoading = false;
   } else {
     geonamesService.getCountries()
       .success(function (geonames) {
         geonamesCache.put('countries', geonames.geonames);
         countries.geonames = geonamesCache.get('countries');
-      })
+      }, $timeout(function(){
+        countries.isLoading = false;
+      }, 1000))
       .error(function () {
         countries.error = 'Error retrieving country list';
       });
   }
-
-  $timeout(function(){
-    if(countries.geonames || countries.error) {
-      countries.isLoading = false;
-    } else {
-      //Shouldn't be possible to get here
-      countries.error = 'Error';
-    }
-  }, 1000);
 }

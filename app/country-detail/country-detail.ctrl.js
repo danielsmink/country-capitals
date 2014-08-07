@@ -26,6 +26,7 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
   // Use cache if the country is already cached
   if (cache) {
     country.detail = cache;
+    country.isLoading = false;
   } else {
     // @TODO refactor to prevent deep nesting and unreadable code
     // Get country info
@@ -57,7 +58,9 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
                     country.error = 'Error retrieving neighbours';
                   });
               }
-            })
+            }, $timeout(function(){
+              country.isLoading = false;
+            }, 1000))
             .error(function () {
               country.error = 'Error retrieving capital info';
             });
@@ -67,14 +70,4 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
         country.error = 'Error retrieving country list';
       });
   }
-
-  $timeout(function(){
-    if(country.detail || country.error) {
-      country.isLoading = false;
-    } else {
-      //Shouldn't be possible to get here
-      country.error = 'Error';
-    }
-  }, 1000);
-
 }
