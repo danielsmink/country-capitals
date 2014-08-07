@@ -10,6 +10,10 @@
         border-collapse: collapse;
     }
 
+    tr {
+        cursor: pointer;
+    }
+
     th, td {
         $cellWidth: (1280px / 6);
         @include rem(width, $cellWidth);
@@ -20,7 +24,7 @@
     thead {
         @include rem(width, 1280px);
         display: table-header-group;
-        tr{
+        tr {
             display: block;
             position: relative;
         }

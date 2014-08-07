@@ -10,8 +10,13 @@
             <dd>{{country.detail.capital.name}}</dd>
             <dt>Population of Capital:</dt>
             <dd>{{country.detail.capital.population | number}}</dd>
+            <dt>Continent:</dt>
+            <dd>{{country.detail.country.continentName}}</dd>
             <dt>{{country.detail.neighbours.length}} Neighbours:</dt>
             <dd>
+                <span data-ng-if="country.detail.neighbours.length === 0">
+                    No Neighbours
+                </span>
                 <a data-ng-repeat="neighbour in country.detail.neighbours"
                    data-ng-click="country.go('/countries/' + neighbour.countryCode + '-' + neighbour.countryName)"
                         href="">

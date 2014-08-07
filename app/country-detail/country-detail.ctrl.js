@@ -29,6 +29,7 @@ function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCa
   if (cache) {
     country.detail = cache;
   } else {
+    // @TODO refactor to prevent deep nesting and unreadable code
     // Get country info
     geonamesService.getCountry()
       .success(function (detail) {

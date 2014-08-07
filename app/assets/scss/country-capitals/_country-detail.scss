@@ -3,4 +3,30 @@
   .country-detail-wrapper {
     min-height: 535px;
   }
+    h2 {
+        @include rem(font-size, 38px);
+        font-weight: 700;
+        padding: 20px 0px;
+    }
+
+    dl {
+        dt {
+            float: left;
+            clear: left;
+            margin-right: 5px;
+            font-weight: bold;
+            width: 200px;
+        }
+        dd {
+            margin-left: 0px;
+        }
+    }
+
+    .images {
+        text-align: center;
+        img {
+            max-width: 230px;
+            margin-right: 5px;
+        }
+    }
 }
