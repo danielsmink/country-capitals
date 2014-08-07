@@ -23,10 +23,6 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
     neighbours: ''
   };
 
-  country.go = function (path) {
-    $location.path(path);
-  };
-
   // Use cache if the country is already cached
   if (cache) {
     country.detail = cache;
