@@ -1,6 +1,12 @@
 // Country detail view styling
 #country-capitals {
 
+    .country-detail {
+        & .loading {
+            display: none;
+        }
+    }
+
     h2 {
         @include rem(font-size, 38px);
         font-weight: 700;
