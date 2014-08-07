@@ -1,12 +1,11 @@
 // Country detail view styling
 #country-capitals {
-  .country-detail-wrapper {
-    min-height: 535px;
-  }
+
     h2 {
         @include rem(font-size, 38px);
         font-weight: 700;
-        padding: 20px 0px;
+        margin: 0;
+        padding: 10px 0px;
     }
 
     dl {

@@ -1,7 +1,15 @@
 // Menu styling
 #country-capitals {
+    position: relative;
+    footer {
+        display: block;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 680px;
+        width: 100%;
+    }
   nav {
-    text-align: center;
     li {
       @include border-radius(4px, 4px);
       @include single-transition(background-color, 2s);
