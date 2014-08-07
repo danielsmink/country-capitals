@@ -7,9 +7,11 @@ angular
   .module('CountriesCtrl', CountriesCtrl);
 
 /* @ngInject */
-function CountriesCtrl ($location, geonamesService, geonamesCache) {
+function CountriesCtrl ($location, $timeout, geonamesService, geonamesCache) {
   var countries = this,
     cache = geonamesCache.get('countries');
+
+  countries.isLoading = true;
 
   countries.ordering = 'countryName';
 
@@ -30,4 +32,13 @@ function CountriesCtrl ($location, geonamesService, geonamesCache) {
         countries.error = 'Error retrieving country list';
       });
   }
+
+  $timeout(function(){
+    if(countries.geonames || countries.error) {
+      countries.isLoading = false;
+    } else {
+      //Shouldn't be possible to get here
+      countries.error = 'Error';
+    }
+  }, 1000);
 }

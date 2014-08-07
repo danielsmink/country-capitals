@@ -7,11 +7,13 @@ angular
   .module('CountryDetailCtrl', CountryDetailCtrl);
 
 /* @ngInject */
-function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCache) {
+function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, geonamesCache) {
   var country = this,
     countryParams = $routeParams.country.split('-'),
     countryCode = countryParams[0],
     cache = geonamesCache.get(countryCode);
+
+  country.isLoading = true;
 
   geonamesService.setIsoCode(countryCode);
 
@@ -69,5 +71,14 @@ function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCa
         country.error = 'Error retrieving country list';
       });
   }
+
+  $timeout(function(){
+    if(country.detail || country.error) {
+      country.isLoading = false;
+    } else {
+      //Shouldn't be possible to get here
+      country.error = 'Error';
+    }
+  }, 1000);
 
 }
