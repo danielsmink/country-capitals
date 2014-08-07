@@ -73,7 +73,7 @@ function geonamesService ($http, geoApiUsername, apiBaseUrl) {
     );
   }
 
-  // Retrieve capital info from Geonames API
+  // Retrieve country neighbours from Geonames API
   function getNeighbours (geonameId) {
 
     // return Promise
