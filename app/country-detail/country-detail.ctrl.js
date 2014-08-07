@@ -40,7 +40,12 @@ function CountryDetailCtrl ($routeParams, $location, geonamesService, geonamesCa
           geonamesService.getCapital(country.detail.country)
             .success(function (capital) {
               if(capital.geonames.length === 0) {
-                country.error = 'Error retrieving capital info';
+                // If no capital is found we assume the country has no capital
+                country.detail.capital ={
+                  name: 'No capital',
+                  population: '0'
+                };
+                geonamesCache.put(countryCode, country.detail);
               } else {
                 country.detail.capital = capital.geonames[0];
                 geonamesService.getNeighbours(country.detail.country.geonameId)
