@@ -1,4 +1,4 @@
-<div class="country-table-wrapper">
+<div class="country-table-wrapper" ng-class="{loading: countries.isLoading}">
     <table data-ng-if="countries.geonames">
         <thead>
             <tr>
@@ -13,7 +13,7 @@
         <tbody>
             <tr
                 data-ng-repeat="country in countries.geonames | orderBy:countries.ordering"
-                data-ng-click="countries.go('/countries/' + country.countryName, country.countryCode)">
+                data-ng-click="countries.go('/countries/' + country.countryCode + '-' + country.countryName + '/capital')">
                 <td>{{country.countryName}}</td>
                 <td>{{country.countryCode}}</td>
                 <td>{{country.capital}}</td>

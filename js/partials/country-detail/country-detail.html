@@ -1,4 +1,4 @@
-<div class="country-detail-wrapper">
+<div class="country-detail-wrapper" ng-class="{loading: country.isLoading}">
     <div data-ng-if="country.detail.country">
         <h2>{{country.detail.country.countryName}}</h2>
         <dl>
@@ -10,10 +10,15 @@
             <dd>{{country.detail.capital.name}}</dd>
             <dt>Population of Capital:</dt>
             <dd>{{country.detail.capital.population | number}}</dd>
-            <dt data-ng-if="country.detail.neighbours.length != 0">{{country.detail.neighbours.length}} Neighbours:</dt>
-            <dd data-ng-if="country.detail.neighbours.length != 0">
+            <dt>Continent:</dt>
+            <dd>{{country.detail.country.continentName}}</dd>
+            <dt>{{country.detail.neighbours.length}} Neighbours:</dt>
+            <dd>
+                <span data-ng-if="country.detail.neighbours.length === 0">
+                    No Neighbours
+                </span>
                 <a data-ng-repeat="neighbour in country.detail.neighbours"
-                   data-ng-click="country.go('/countries/' + neighbour.countryName, neighbour.countryCode)"
+                   data-ng-href="#/countries/{{neighbour.countryCode + '-' + neighbour.countryName}}/capital"
                         href="">
                     {{neighbour.name}}<span data-ng-if="!$last">, </span>
                 </a>
