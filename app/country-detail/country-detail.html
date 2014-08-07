@@ -18,7 +18,7 @@
                     No Neighbours
                 </span>
                 <a data-ng-repeat="neighbour in country.detail.neighbours"
-                   data-ng-click="country.go('/countries/' + neighbour.countryCode + '-' + neighbour.countryName)"
+                   data-ng-href="#/countries/{{neighbour.countryCode + '-' + neighbour.countryName}}/capital"
                         href="">
                     {{neighbour.name}}<span data-ng-if="!$last">, </span>
                 </a>

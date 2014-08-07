@@ -19,7 +19,7 @@ function config ($routeProvider) {
       controller: 'CountriesCtrl',
       controllerAs: 'countries'
     })
-    .when('/countries/:country', {
+    .when('/countries/:country/capital', {
       templateUrl: './js/partials/country-detail/country-detail.html',
       controller: 'CountryDetailCtrl',
       controllerAs: 'country'
