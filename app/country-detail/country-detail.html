@@ -2,7 +2,7 @@
     <div class="country-detail" data-ng-if="country.detail.country">
         <h2>{{country.detail.country.countryName}}</h2>
         <dl>
-            <dt>Population of Country:</dt>
+            <dt>Population of {{country.detail.country.countryName}}:</dt>
             <dd>{{country.detail.country.population | number}}</dd>
             <dt>Area:</dt>
             <dd>{{country.detail.country.areaInSqKm | number}} square km</dd>
