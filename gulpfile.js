@@ -14,7 +14,7 @@ var gulp = require('gulp'),
   minifyCSS = require('gulp-minify-css'),
   deploy = require('gulp-gh-pages'),
   paths = {
-    scripts: './app/**/*.js',
+    scripts: ['./app/**/*.js', '!./app/**/*Spec.js'],
     jsCompiled: 'public/js',
     scss: './app/assets/scss/**/*.scss',
     scssDir: './app/assets/scss',

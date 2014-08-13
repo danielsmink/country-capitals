@@ -18,8 +18,9 @@ module.exports = function(config) {
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js',
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-animate.min.js',
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-route.min.js',
-      'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-mocks.min.js',
-      'app/**/*.js'
+      'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-mocks.js',
+      'app/**/!(*Spec).js',
+      'app/**/*Spec.js'
     ],
 
 
@@ -31,7 +32,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'app/**/*.js': ['coverage']
+      'app/**/!(*Spec).js': ['coverage']
     },
 
 
