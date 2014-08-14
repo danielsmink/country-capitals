@@ -13,6 +13,7 @@ var gulp = require('gulp'),
   stylish = require('jshint-stylish'),
   minifyCSS = require('gulp-minify-css'),
   deploy = require('gulp-gh-pages'),
+  karma = require('gulp-karma'),
   paths = {
     scripts: ['./app/**/*.js', '!./app/**/*Spec.js'],
     jsCompiled: 'public/js',
@@ -98,10 +99,23 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 });
 
 // Default task
-gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'compass', 'js', 'browser-sync']);
+gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'compass', 'test', 'js', 'browser-sync']);
+
+gulp.task('test', function() {
+  // Be sure to return the stream
+  return gulp.src('./blabla')
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    });
+});
 
 // Deploy task
-gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', function () {
+gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['test', 'js'], function () {
   return gulp.src('./public/**/*')
     .pipe(deploy());
 });

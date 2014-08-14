@@ -8,14 +8,14 @@ angular
 
 /* @ngInject */
 function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, geonamesCache) {
-  var country = this,
-    countryParams = $routeParams.country.split('-'),
-    countryCode = countryParams[0],
-    cache = geonamesCache.get(countryCode);
+  var country = this;
 
+  country.countryParams = $routeParams.country.split('-');
+  country.countryCode = country.countryParams[0];
+  country.cache = geonamesCache.get(country.countryCode);
   country.isLoading = true;
 
-  geonamesService.setIsoCode(countryCode);
+  geonamesService.setIsoCode(country.countryCode);
 
   country.detail = {
     country: '',
@@ -24,8 +24,8 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
   };
 
   // Use cache if the country is already cached
-  if (cache) {
-    country.detail = cache;
+  if (country.cache) {
+    country.detail = country.cache;
     country.isLoading = false;
   } else {
     // @TODO refactor to prevent deep nesting and unreadable code
@@ -45,22 +45,20 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
                   name: 'No capital',
                   population: '0'
                 };
-                geonamesCache.put(countryCode, country.detail);
+                geonamesCache.put(country.countryCode, country.detail);
               } else {
                 country.detail.capital = capital.geonames[0];
                 geonamesService.getNeighbours(country.detail.country.geonameId)
                   .success(function (neighbours) {
                     country.detail.neighbours = neighbours.geonames;
                     // Cache both country and capital info
-                    geonamesCache.put(countryCode, country.detail);
+                    geonamesCache.put(country.countryCode, country.detail);
                   })
                   .error(function () {
                     country.error = 'Error retrieving neighbours';
                   });
               }
-            }, $timeout(function(){
-              country.isLoading = false;
-            }, 1000))
+            })
             .error(function () {
               country.error = 'Error retrieving capital info';
             });
@@ -68,6 +66,8 @@ function CountryDetailCtrl ($timeout, $routeParams, $location, geonamesService, 
       })
       .error(function () {
         country.error = 'Error retrieving country list';
-      });
+      }, $timeout(function(){
+        country.isLoading = false;
+      }, 1000));
   }
 }
